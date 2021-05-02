@@ -4,25 +4,21 @@ import java.util.Collections;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import de.unistuttgart.vis.dsass2021.ex01.p2.SpeedList.Node;
 
+public abstract  class SpeedList<T> implements ISpeedList<T> {
 
-/**
- * 
- * Nutze diese Klasse, um die Methoden aus dem Interface zu implementieren.
- * Der angezeigte Fehler ist beabsichtigt und kommt vor, weil die Methoden des Interfaces noch nicht implementiert wurden.
- * Mit Rechtsklick auf diesen Fehler kannst du 'add unimplemented methods' anklicken, um dir automatisch eine leere Methoden zu erzeugen.
- * 
- * 
- */
-
-public class SpeedList<T> implements ISpeedList<T> {
-
-	class Node<T> {
+	private static Node head;
+	private static class Node<T> {
 		private T obj;
 		private Node<T> next;
 		private Node<T> next8;
-		private Node<T> head;
+		
+		public Node(T obj,Node next,Node nexy8) {
+			this.obj = obj;
+			this.next = next;
+			this.next8 = next8;
+		}
+		
 		public T getElement() { return obj; }
 		public void setElement(T obj) {
 		this.obj = obj;
@@ -34,12 +30,13 @@ public class SpeedList<T> implements ISpeedList<T> {
 		this.next = next;
 		}
 		public Node<T> getNext8() {
-		return next;
+		return next8;
 			}
 		public void setNext8(Node<T> next8) {
-		this.next = next;
+		this.next8 = next8;
 			}
 		
+		private int size;
 		public int size() {
 			Node<T> x = head;
 			int i = 1;
@@ -50,18 +47,23 @@ public class SpeedList<T> implements ISpeedList<T> {
                  x=x.next;
                  i=i+1;
 			}
-			return i;
+			size = i;
+			return size;
 			}
 		
 		
 		public void prepend(T t) {
-			//head = new Node<T> (t, head,);
+			Node<T> n = new Node<T>(t, head, head);
+			head.setNext(n);	
 		}
 		
         public void append(T t) {
-			/*Node<T> lastNode = head;
-			while (lastNode.next != null) {
-				lastNode = lastNode.next;*/
+        	Node<T> l = head;
+        	while (l.getNext() != null)
+        	l = l.getNext();
+        	Node<T> n = new Node<T>(t, null,null);
+        	l.setNext(n);
+			
 		}
 		
 			public T getElementAt(int pos) {
@@ -90,10 +92,9 @@ public class SpeedList<T> implements ISpeedList<T> {
 			}
 			
 			private boolean isElementPos(int pos) {
-				return pos>=0 && pos<size();
+				return pos>=0 && pos<size;
 			}
-		
-	}
+}
 	
 	
 		
@@ -119,3 +120,79 @@ public class SpeedListTest {
 	}
 
 	// Add your test methods here	
+
+
+
+
+
+
+
+
+
+
+
+@Override
+public int size() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+@Override
+public void prepend(T t) {
+	// TODO Auto-generated method stub
+	
+}
+
+
+
+
+
+
+
+
+
+
+@Override
+public void append(T t) {
+	// TODO Auto-generated method stub
+	
+}
+
+
+
+
+
+
+
+
+
+
+@Override
+public T getElementAt(int pos) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+
+
+
+
+
+
+
+
+@Override
+public T getPrevious(int pos) {
+	// TODO Auto-generated method stub
+	return null;
+}
